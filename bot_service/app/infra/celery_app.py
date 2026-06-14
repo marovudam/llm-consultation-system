@@ -5,7 +5,7 @@ celery_app = Celery(
     settings.APP_NAME,
     broker=settings.RABBITMQ_URL,
     backend=settings.REDIS_URL,
-    include=["app.tasks"],
+    include=["app.tasks.llm_tasks"],
 )
 
 celery_app.conf.update(

@@ -7,7 +7,7 @@ from app.core.security import decode_token
 from app.db.session import AsyncSessionLocal
 from app.repositories.users import UserRepository
 from app.usecases.auth import AuthUseCase
-from app.code.exceptions import TokenExpiredError, InvalidTokenError
+from app.core.exceptions import TokenExpiredError, InvalidTokenError
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """Получение сессии БД"""
