@@ -2,22 +2,22 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     """Класс настроек. Настройки по умолчанию читаются из файла .env"""
-    APP_NAME: str
-    ENV: str
+    APP_NAME: str = "bot_service"
+    ENV: str = "local"
 
-    TELEGRAM_BOT_TOKEN: str
+    TELEGRAM_BOT_TOKEN: str = ""
 
-    JWT_SECRET: str
-    JWT_ALG: str
+    JWT_SECRET: str = "change_me_super_secret"
+    JWT_ALG: str = "HS256"
 
-    REDIS_URL: str
-    RABBITMQ_URL: str
+    REDIS_URL: str = "redis://redis:6379/0"
+    RABBITMQ_URL: str = "amqp://guest:guest@rabbitmq:5672//"
 
-    OPENROUTER_API_KEY: str
-    OPENROUTER_BASE_URL: str
-    OPENROUTER_MODEL: str
-    OPENROUTER_SITE_URL: str
-    OPENROUTER_APP_NAME: str
+    OPENROUTER_API_KEY: str = ""
+    OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
+    OPENROUTER_MODEL: str = "minimax/minimax-m2.5"
+    OPENROUTER_SITE_URL: str = "https://example.com"
+    OPENROUTER_APP_NAME: str = "bot-service"
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 

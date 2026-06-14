@@ -22,7 +22,12 @@ dependencies = [
   "fakeredis>=2.23.0",
   "pyjwt>=2.12.1",
   "cryptography>=47.0.0",
+  "aiogram>=3.28.2",
+  "redis>=8.0.0"
 ]
 
 [tool.uv]
-dev-dependencies = []
+dev-dependencies = [
+  "respx>=0.23.1",
+  "fakeredis>=2.36.1"
+]

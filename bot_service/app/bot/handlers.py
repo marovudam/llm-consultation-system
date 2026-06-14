@@ -1,6 +1,6 @@
 from aiogram import Router, types
 from aiogram.filters import Command
-from app.infra.redis import get_redis
+from app.infra.redis import redis_client, get_redis
 from app.core.jwt import decode_and_validate
 from app.tasks.llm_tasks import llm_request
 
@@ -19,7 +19,7 @@ async def start_command(message: types.Message) -> None:
     )
 
 @router.message(Command("token"))
-async def save_token(message: types.Message) -> None:
+async def token_command(message: types.Message) -> None:
     """Получение токена (команда /token)"""
     token = message.text.replace("/token", "").strip()    
     if not token:
@@ -36,7 +36,7 @@ async def save_token(message: types.Message) -> None:
 
 
 @router.message()
-async def ask_llm(message: types.Message) -> None:
+async def llm_message(message: types.Message) -> None:
     """Диалог с ботом без команд"""
     redis = await get_redis()
     token = await redis.get(f"token:{message.from_user.id}")
