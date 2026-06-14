@@ -4,6 +4,7 @@ from passlib.context import CryptContext
 from typing import Any
 
 from app.core.config import settings
+from app.core.exceptions import TokenExpiredError
 
 
 pwd_context = CryptContext(schemes=["bcrypt"])
@@ -33,4 +34,6 @@ def create_access_token(sub: str, role: str) -> str:
 def decode_token(token: str) -> dict[str, Any]:
     """Декодирование access-токена"""
     payload = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALG])
+    if int(time.time() > payload["exp"]):
+        raise TokenExpiredError()
     return payload

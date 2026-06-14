@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -7,6 +7,7 @@ from app.core.security import decode_token
 from app.db.session import AsyncSessionLocal
 from app.repositories.users import UserRepository
 from app.usecases.auth import AuthUseCase
+from app.code.exceptions import TokenExpiredError, InvalidTokenError
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """Получение сессии БД"""
